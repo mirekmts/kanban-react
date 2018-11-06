@@ -20,6 +20,7 @@ class AddList extends Component {
       this.state.showAddListForm ? 
         <AddListForm hideAddListForm={this.hideAddListForm} {...this.props} /> :
         <div className="flex-container">
+          {this.props.children}
           <Button onClick={this.showAddListForm} >{this.props.buttonText}</Button>
         </div>
     )
