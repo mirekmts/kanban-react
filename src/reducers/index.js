@@ -40,12 +40,31 @@ const addNewTask = (state, itemValue, listId) => {
 	}
 };
 
+const updateList = (state, listName, listId) => {
+  const lists = [...state.lists];
+
+  const newListArray = lists.map(list => {
+    if(list.id === listId) {
+      list.name = listName;
+    }
+
+    return list;
+  });
+
+  return {
+    ...state,
+    lists: newListArray,
+  }
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.ADD_NEW_LIST:
       return addNewList(state, action.listName)
     case actions.ADD_NEW_TASK:
       return addNewTask(state, action.itemValue, action.listId)
+    case actions.UPDATE_LIST:
+      return updateList(state, action.listName, action.listId)
     default:
       return state;
   }

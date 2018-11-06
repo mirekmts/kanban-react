@@ -20,4 +20,14 @@ describe('actions', () => {
 
     expect(actions.addNewTask(newItem, list.id)).toEqual(expectedAction);
   });
+
+  it('creates an actions to update list name', () => {
+    const expectedAction = {
+      type: actions.UPDATE_LIST,
+      listId: list.id,
+      listName: newListName,
+    };
+
+    expect(actions.updateList(newListName, list.id)).toEqual(expectedAction)
+  });
 });

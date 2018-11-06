@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Button, Input, Form, Message } from 'semantic-ui-react';
 import {
   addNewTask,
-} from '../actions/actions';
+} from '../../actions';
 
 export class AddTaskForm extends PureComponent {
   initialState = {
