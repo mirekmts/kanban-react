@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import TaskList from './components/TaskList'
 import PropTypes from 'prop-types';
+import AddList from './components/AddList'
 import './App.scss';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="app-container">
         {this.props.lists.map(list => (
           <TaskList 
             key={list.id}
@@ -14,7 +15,10 @@ class App extends Component {
             name={list.name}
             items={list.items}
           />
-          ))}
+        ))}
+        <div className="task-list">
+          <AddList buttonText="Add a list..."/>
+        </div>
       </div>
     );
   }
