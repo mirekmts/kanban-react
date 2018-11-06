@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types';
 import { Card } from 'semantic-ui-react'
 
 class Task extends PureComponent {
@@ -12,6 +13,11 @@ class Task extends PureComponent {
       </Card>
     )
   }
+}
+
+Task.propTypes = {
+  name: PropTypes.string,
+  description: PropTypes.string,
 }
 
 export default Task

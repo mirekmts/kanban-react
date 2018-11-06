@@ -3,12 +3,12 @@ export const list = {
   name: 'Backlog',
   items: [
       {
-          id: 1,
+          id: '1',
           name: 'Power up the robot',
           description: 'description',
       },
       {
-          id: 2,
+          id: '2',
           name: 'Submit chatbot build for review',
           description: 'description',
       },
@@ -16,7 +16,7 @@ export const list = {
 }
 
 export const item = {
-    id: 3,
+    id: '3',
     name: 'Chatbot',
     description: 'Submit chatbot build for review',
 }

@@ -22,7 +22,7 @@ export class TaskList extends PureComponent {
   }
 }
 
-TaskList.PropTypes = {
+TaskList.propTypes = {
   name: PropTypes.string,
   id: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.shape({
