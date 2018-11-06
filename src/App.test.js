@@ -1,9 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { shallow } from 'enzyme'
+import { App } from './App';
+import { lists } from './data/lists'
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+const props = { lists }
+
+describe('<App />', () => {
+  let wrapper;
+
+  describe('rendering', () => {
+    beforeEach(() => {
+      wrapper = shallow(<App { ...props } />);
+    });
+
+    it('Renders a button to add new list', () => {
+      expect(wrapper.find('AddList').exists()).toBe(true)
+    })
+
+    it('Renders TaskList', () => {
+      expect(wrapper.find('Connect(TaskList)')).toHaveLength(props.lists.length)
+    })
+  });
+})

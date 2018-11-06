@@ -1,5 +1,5 @@
 import * as actions from './index';
-import { list } from '../data/fixtures';
+import { list, newListName, newItem } from '../data/fixtures';
 
 describe('actions', () => {
   it('creates an actions to add new list', () => {
