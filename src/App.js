@@ -30,6 +30,7 @@ class App extends Component {
 }
 
 App.propTypes = {
+  addNewList: PropTypes.func,
   lists: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
