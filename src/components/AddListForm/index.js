@@ -19,8 +19,7 @@ class AddListForm extends PureComponent {
       return 
     }
 
-    // TODO submit method
-    
+    this.props.submitMethod( name, this.props.id )
     this.handleCloseForm()
   }
 

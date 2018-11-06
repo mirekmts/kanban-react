@@ -7,7 +7,6 @@ import rootReducer from './reducers'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import App from './App';
-import { lists } from './data/lists'
 import 'semantic-ui-css/semantic.min.css';
 import './index.css';
 
@@ -30,7 +29,7 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-        <App lists={lists}/>
+        <App />
     </Provider>, document.getElementById('root'));
 
 serviceWorker.unregister();

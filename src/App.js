@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
 import TaskList from './components/TaskList'
 import PropTypes from 'prop-types';
 import AddList from './components/AddList'
+import {
+  addNewList,
+} from './actions'
 import './App.scss';
 
 class App extends Component {
@@ -17,7 +22,7 @@ class App extends Component {
           />
         ))}
         <div className="task-list">
-          <AddList buttonText="Add a list..."/>
+          <AddList submitMethod={this.props.addNewList} buttonText="Add a list..."/>
         </div>
       </div>
     );
@@ -36,4 +41,14 @@ App.defaultProps = {
   lists: [],
 }
 
-export default App;
+const mapStateToProps = (state) => {
+	return {
+		lists: state.lists,
+	}
+}	
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ addNewList }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
