@@ -18,7 +18,7 @@ class AddList extends Component {
   render () {
     return (
       this.state.showAddListForm ? 
-        <AddListForm {...this.props} /> :
+        <AddListForm hideAddListForm={this.hideAddListForm} {...this.props} /> :
         <div className="flex-container">
           <Button onClick={this.showAddListForm} >{this.props.buttonText}</Button>
         </div>
