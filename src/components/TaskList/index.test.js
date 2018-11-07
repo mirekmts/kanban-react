@@ -1,16 +1,21 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { TaskList } from './index'
-import { list } from '../../data/fixtures'
+import { list, item } from '../../data/fixtures'
+import { tasks } from '../../data/mockData'
 
-const props = list
+const props = {
+  items: list.items,
+  name: list.name,
+  tasks,
+}
 
 describe('<TaskList/>', () => {
 
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<TaskList {...props} />)
+    wrapper = shallow(<TaskList {...props}  />)
   })
 
   it('render header', () => {
@@ -21,7 +26,7 @@ describe('<TaskList/>', () => {
     expect(wrapper.find('AddList').exists()).toBe(true)
   })
 
-  it('render two <Task />', () => {
+  it('render all <Task />', () => {
     expect(wrapper.find('Task')).toHaveLength(props.items.length)
   })
 

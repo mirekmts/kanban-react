@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Header, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { updateList } from '../../actions';
 import Task from '../Task';
 import AddTaskForm from '../AddTaskForm';
@@ -22,6 +21,8 @@ export class TaskList extends PureComponent {
   };
   
   render () {
+    const taskList = this.props.items.map(id => this.props.tasks.find(task => task.id === id)).filter(note => note);
+
     return (
       <div className="task-list">
         <AddList 
@@ -33,7 +34,7 @@ export class TaskList extends PureComponent {
           <Header className="task-list-header" as='h2'>{this.props.name}</Header>
         </AddList>
         <div className="task-list-content">
-          {this.props.items.map(item => (
+          {taskList.map(item => (
             <Task 
               key={item.id}
               name={item.name}
@@ -54,11 +55,7 @@ TaskList.propTypes = {
   updateList: PropTypes.func.isRequired,
   name: PropTypes.string,
   id: PropTypes.string,
-  items: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-    description: PropTypes.string
-  })),
+  items: PropTypes.arrayOf(PropTypes.string)
 };
 
 TaskList.defaultProps = {
@@ -66,8 +63,14 @@ TaskList.defaultProps = {
   updateList: () => {},
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ updateList }, dispatch)
+const mapDispatchToProps = (dispatch) => ({
+  updateList: (name, id) => dispatch(updateList(name, id))
+});
+
+const mapStateToProps = (state) => {
+	return {
+		tasks: state.tasks,
+	};
 };
 
-export default connect(null, mapDispatchToProps)(TaskList);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

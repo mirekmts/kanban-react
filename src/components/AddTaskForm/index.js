@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Button, Input, Form, Message } from 'semantic-ui-react';
 import {
   addNewTask,
+  attachToList,
 } from '../../actions';
 
 export class AddTaskForm extends PureComponent {
@@ -28,7 +28,7 @@ export class AddTaskForm extends PureComponent {
       return 
     }
 
-    this.props.addNewTask({name, description }, this.props.listId);
+    this.props.onCreateTask({name, description}, this.props.listId);
     this.handleCloseForm();
   };
 
@@ -81,8 +81,12 @@ AddTaskForm.propTypes = {
   listId: PropTypes.string,
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ addNewTask }, dispatch)
-}
+const mapDispatchToProps = (dispatch) => ({
+  onCreateTask: (itemValue, listId) => {
+    const newTask= addNewTask(itemValue)
+    dispatch(newTask);
+    dispatch(attachToList(listId, newTask.payload.id));
+  },
+})
 
 export default connect(null, mapDispatchToProps)(AddTaskForm)

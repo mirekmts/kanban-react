@@ -8,7 +8,7 @@ describe('<AddTaskForm/>', () => {
 
   beforeEach(() => {
     const mock = jest.fn();
-    wrapper = shallow(<AddTaskForm addNewTask={mock} hideAddTaskForm={mock} />)
+    wrapper = shallow(<AddTaskForm onCreateTask={mock} hideAddTaskForm={mock} />)
   })
 
   it('render two buttons', () => {
