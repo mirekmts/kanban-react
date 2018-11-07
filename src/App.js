@@ -1,32 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import TaskList from './components/TaskList'
 import PropTypes from 'prop-types';
-import AddList from './components/AddList'
+import TaskList from './components/TaskList';
+import AddList from './components/AddList';
 import {
   addNewList,
-} from './actions'
+} from './actions';
 import './App.scss';
 
-export class App extends Component {
-  render() {
-    return (
-      <div className="app-container">
-        {this.props.lists.map(list => (
-          <TaskList 
-            key={list.id}
-            id={list.id}
-            name={list.name}
-            items={list.items}
-          />
-        ))}
-        <div className="task-list">
-          <AddList submitMethod={this.props.addNewList} buttonText="Add a list..."/>
-        </div>
-      </div>
-    );
-  }
-}
+export const App = props => (
+  <div className="app-container">
+    {props.lists.map(list => (
+      <TaskList
+        key={list.id}
+        id={list.id}
+        name={list.name}
+        items={list.items}
+      />
+    ))}
+    <div className="task-list">
+      <AddList submitMethod={props.addNewList} buttonText="Add a list..." />
+    </div>
+  </div>
+);
 
 App.propTypes = {
   addNewList: PropTypes.func,
@@ -35,20 +31,19 @@ App.propTypes = {
     name: PropTypes.string,
     items: PropTypes.array,
   })),
-}
+};
 
 App.defaultProps = {
   lists: [],
-}
+  addNewList: () => {},
+};
 
-const mapStateToProps = (state) => {
-	return {
-		lists: state.lists,
-	}
-}	
+const mapStateToProps = state => ({
+  lists: state.lists,
+});
 
-const mapDispatchToProps = (dispatch) => ({
-  addNewList: (name, id) => dispatch(addNewList(name, id))
-})
+const mapDispatchToProps = dispatch => ({
+  addNewList: (name, id) => dispatch(addNewList(name, id)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

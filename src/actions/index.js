@@ -1,2 +1,2 @@
-export * from './lists'
-export * from './tasks'
+export * from './lists';
+export * from './tasks';

@@ -8,7 +8,7 @@ describe('Actions Tasks', () => {
       payload: {
         name: newItem.name,
         description: newItem.description,
-      }
+      },
     };
 
     expect(actions.addNewTask(newItem).type).toEqual(expectedAction.type);
@@ -18,7 +18,7 @@ describe('Actions Tasks', () => {
   });
 
   it('creates an actions to add new task to list', () => {
-    const taskId = '1bad2'
+    const taskId = '1bad2';
     const expectedAction = {
       type: actions.DELETE_TASK,
       taskId,
@@ -26,5 +26,4 @@ describe('Actions Tasks', () => {
 
     expect(actions.deleteTask(taskId)).toEqual(expectedAction);
   });
-
 });

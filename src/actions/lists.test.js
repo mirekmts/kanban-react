@@ -38,6 +38,6 @@ describe('Actions List', () => {
       listName: newListName,
     };
 
-    expect(actions.updateList(newListName, list.id)).toEqual(expectedAction)
+    expect(actions.updateList(newListName, list.id)).toEqual(expectedAction);
   });
 });
