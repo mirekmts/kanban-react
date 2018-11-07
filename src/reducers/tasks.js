@@ -9,6 +9,8 @@ const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.ADD_NEW_TASK:
       return addNewTask(state, action.payload)
+    case actions.DELETE_TASK:
+      return state.filter(task => task.id !== action.taskId);
     default:
       return state;
   }

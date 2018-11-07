@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Header, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { updateList } from '../../actions';
+import { updateList, deleteTask, removeTaskFromList } from '../../actions';
 import Task from '../Task';
 import AddTaskForm from '../AddTaskForm';
 import AddList from '../AddList';
@@ -19,6 +19,10 @@ export class TaskList extends PureComponent {
 	hideAddTaskForm = () => {
 		this.setState({addingTask: false});
   };
+
+  onRemoveTask = (taskId) => {
+    this.props.onRemoveTask(this.props.listId, taskId)
+  }
   
   render () {
     const taskList = this.props.items.map(id => this.props.tasks.find(task => task.id === id)).filter(note => note);
@@ -37,8 +41,10 @@ export class TaskList extends PureComponent {
           {taskList.map(item => (
             <Task 
               key={item.id}
+              id={item.id}
               name={item.name}
               description={item.description}
+              onRemoveTask={this.onRemoveTask}
             />
           ))}
           { this.state.addingTask ? 
@@ -64,7 +70,11 @@ TaskList.defaultProps = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  updateList: (name, id) => dispatch(updateList(name, id))
+  updateList: (name, id) => dispatch(updateList(name, id)),
+  onRemoveTask: (listId, taskId) => {
+    dispatch(deleteTask(taskId));
+    dispatch(removeTaskFromList(listId, taskId));
+  },
 });
 
 const mapStateToProps = (state) => {

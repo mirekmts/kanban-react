@@ -24,12 +24,25 @@ const updateList = (state, listName, listId) => {
   });
 };
 
-const attachToLine = (state, listId, taskId) => {
+const addTaskToList = (state, listId, taskId) => {
   return state.map(list => {
     if (list.id === listId) {
       return {
         ...list,
         items: list.items.concat(taskId),
+      }
+    }
+
+    return list;
+  });
+};
+
+const removeTaskFromList = (state, listId, taskId) =>  {
+  return state.map(list => {
+    if (list.id === listId) {
+      return {
+        ...list,
+        items: list.items.filter(id => id !== taskId)
       }
     }
 
@@ -43,8 +56,10 @@ const listsReducer = (state = initialState, action) => {
       return addNewList(state, action.listName)
     case actions.UPDATE_LIST:
       return updateList(state, action.listName, action.listId)
-    case actions.ATTACH_TO_LIST:
-      return attachToLine(state, action.listId, action.taskId)
+    case actions.ADD_TASK_TO_LIST:
+      return addTaskToList(state, action.listId, action.taskId)
+    case actions.REMOVE_TASK_FROM_LIST:
+      return removeTaskFromList(state, action.listId, action.taskId)
     default:
       return state;
   }

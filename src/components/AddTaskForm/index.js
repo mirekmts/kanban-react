@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Button, Input, Form, Message } from 'semantic-ui-react';
 import {
   addNewTask,
-  attachToList,
+  addTaskToList,
 } from '../../actions';
 
 export class AddTaskForm extends PureComponent {
@@ -85,7 +85,7 @@ const mapDispatchToProps = (dispatch) => ({
   onCreateTask: (itemValue, listId) => {
     const newTask= addNewTask(itemValue)
     dispatch(newTask);
-    dispatch(attachToList(listId, newTask.payload.id));
+    dispatch(addTaskToList(listId, newTask.payload.id));
   },
 })
 
