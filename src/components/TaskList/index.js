@@ -13,33 +13,33 @@ export class TaskList extends PureComponent {
   };
 
   showAddTaskForm = () => {
-		this.setState({addingTask: true});
-	};
-	
-	hideAddTaskForm = () => {
-		this.setState({addingTask: false});
+    this.setState({ addingTask: true });
+  };
+
+  hideAddTaskForm = () => {
+    this.setState({ addingTask: false });
   };
 
   onRemoveTask = (taskId) => {
-    this.props.onRemoveTask(this.props.listId, taskId)
+    this.props.onRemoveTask(this.props.listId, taskId);
   }
-  
-  render () {
+
+  render() {
     const taskList = this.props.items.map(id => this.props.tasks.find(task => task.id === id)).filter(note => note);
 
     return (
       <div className="task-list">
-        <AddList 
-          id={this.props.id} 
-          name={this.props.name} 
-          submitMethod={this.props.updateList} 
+        <AddList
+          id={this.props.id}
+          name={this.props.name}
+          submitMethod={this.props.updateList}
           buttonText="..."
         >
-          <Header className="task-list-header" as='h2'>{this.props.name}</Header>
+          <Header className="task-list-header" as="h2">{this.props.name}</Header>
         </AddList>
         <div className="task-list-content">
           {taskList.map(item => (
-            <Task 
+            <Task
               key={item.id}
               id={item.id}
               name={item.name}
@@ -47,29 +47,35 @@ export class TaskList extends PureComponent {
               onRemoveTask={this.onRemoveTask}
             />
           ))}
-          { this.state.addingTask ? 
-            <AddTaskForm listId={this.props.id} hideAddTaskForm={this.hideAddTaskForm} /> :
-            <Button onClick={this.showAddTaskForm} fluid className="add-card">Add a card...</Button>
+          { this.state.addingTask
+            ? <AddTaskForm listId={this.props.id} hideAddTaskForm={this.hideAddTaskForm} />
+            : <Button onClick={this.showAddTaskForm} fluid className="add-card">Add a card...</Button>
           }
         </div>
       </div>
-    )
+    );
   }
 }
 
 TaskList.propTypes = {
-  updateList: PropTypes.func.isRequired,
+  updateList: PropTypes.func,
+  onRemoveTask: PropTypes.func,
   name: PropTypes.string,
   id: PropTypes.string,
-  items: PropTypes.arrayOf(PropTypes.string)
+  listId: PropTypes.string,
+  items: PropTypes.arrayOf(PropTypes.string),
+  tasks: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+  })),
 };
 
 TaskList.defaultProps = {
   items: [],
   updateList: () => {},
+  onRemoveTask: () => {},
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   updateList: (name, id) => dispatch(updateList(name, id)),
   onRemoveTask: (listId, taskId) => {
     dispatch(deleteTask(taskId));
@@ -77,10 +83,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const mapStateToProps = (state) => {
-	return {
-		tasks: state.tasks,
-	};
-};
+const mapStateToProps = state => ({
+  tasks: state.tasks,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
