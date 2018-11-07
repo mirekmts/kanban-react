@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
 import TaskList from './components/TaskList'
 import PropTypes from 'prop-types';
 import AddList from './components/AddList'
@@ -48,8 +47,8 @@ const mapStateToProps = (state) => {
 	}
 }	
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ addNewList }, dispatch)
-}
+const mapDispatchToProps = (dispatch) => ({
+  addNewList: (name, id) => dispatch(addNewList(name, id))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

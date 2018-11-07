@@ -1,5 +1,5 @@
 import * as actions from './index';
-import { list, newListName, newItem } from '../data/fixtures';
+import { list, newListName, item } from '../data/fixtures';
 
 describe('actions', () => {
   it('creates an actions to add new list', () => {
@@ -11,14 +11,14 @@ describe('actions', () => {
     expect(actions.addNewList(list.name)).toEqual(expectedAction);
   });
 
-  it('creates an actions to add new task', () => {
+  it('creates an actions to attach new task to list', () => {
     const expectedAction = {
-      type: actions.ADD_NEW_TASK,
+      type: actions.ATTACH_TO_LIST,
       listId: list.id,
-      itemValue: newItem,
+      taskId: item.id,
     };
 
-    expect(actions.addNewTask(newItem, list.id)).toEqual(expectedAction);
+    expect(actions.attachToList(list.id, item.id)).toEqual(expectedAction);
   });
 
   it('creates an actions to update list name', () => {
