@@ -1,7 +1,7 @@
 import * as actions from '../actions';
 import { tasks } from '../data/mockData';
 
-const initialState = tasks;
+export const initialState = tasks;
 
 const addNewTask = (state, payload) => state.concat(payload);
 

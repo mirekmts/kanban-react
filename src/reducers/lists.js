@@ -1,18 +1,9 @@
-import uuidv4 from 'uuid/v4';
 import * as actions from '../actions';
 import { lists } from '../data/mockData';
 
-const initialState = lists;
+export const initialState = lists;
 
-const addNewList = (state, listName) => {
-  const newList = {
-    id: uuidv4(),
-    name: listName,
-    items: [],
-  };
-
-  return state.concat(newList);
-};
+const addNewList = (state, payload) => state.concat(payload);
 
 const updateList = (state, listName, listId) => state.map((list) => {
   if (list.id === listId) {
@@ -47,7 +38,7 @@ const removeTaskFromList = (state, listId, taskId) => state.map((list) => {
 const listsReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.ADD_NEW_LIST:
-      return addNewList(state, action.listName);
+      return addNewList(state, action.payload);
     case actions.UPDATE_LIST:
       return updateList(state, action.listName, action.listId);
     case actions.ADD_TASK_TO_LIST:

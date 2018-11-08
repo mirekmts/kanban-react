@@ -5,10 +5,16 @@ describe('Actions List', () => {
   it('creates an actions to add new list', () => {
     const expectedAction = {
       type: actions.ADD_NEW_LIST,
-      listName: list.name,
+      payload: {
+        name: list.name,
+      },
     };
 
-    expect(actions.addNewList(list.name)).toEqual(expectedAction);
+
+    expect(actions.addNewList(list.name).type).toEqual(expectedAction.type);
+    expect(actions.addNewList(list.name).payload.name).toEqual(expectedAction.payload.name);
+    expect(actions.addNewList(list.name).payload.items).toEqual([]);
+    expect(typeof actions.addNewList(list.name).payload.id).toBe('string');
   });
 
   it('creates an actions to add new task to list', () => {

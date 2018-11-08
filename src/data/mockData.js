@@ -22,16 +22,16 @@ export const tasks = [
   {
     id: '1',
     name: 'Power up the robot',
-    description: 'description',
+    description: 'description 1',
   },
   {
     id: '2',
     name: 'Submit chatbot build for review',
-    description: 'description',
+    description: 'description 2',
   },
   {
     id: '3',
-    name: 'Submit chatbot build for review',
-    description: 'description',
+    name: 'Buy milk',
+    description: 'description 3',
   },
 ];

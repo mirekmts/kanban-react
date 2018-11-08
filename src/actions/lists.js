@@ -1,3 +1,5 @@
+import uuidv4 from 'uuid/v4';
+
 export const ADD_NEW_LIST = 'ADD_NEW_LIST';
 export const UPDATE_LIST = 'UPDATE_LIST';
 export const ADD_TASK_TO_LIST = 'ADD_TASK_TO_LIST';
@@ -5,7 +7,11 @@ export const REMOVE_TASK_FROM_LIST = 'REMOVE_TASK_FROM_LIST';
 
 export const addNewList = listName => ({
   type: ADD_NEW_LIST,
-  listName,
+  payload: {
+    id: uuidv4(),
+    name: listName,
+    items: [],
+  },
 });
 
 export const updateList = (listName, listId) => ({

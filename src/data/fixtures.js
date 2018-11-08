@@ -6,13 +6,13 @@ export const list = {
 
 export const item = {
   id: '1',
-  name: 'Chatbot',
-  description: 'Submit chatbot build for review',
+  name: 'Test Name',
+  description: 'Test description',
 };
 
 export const newItem = {
-  name: 'Chatbot',
-  description: 'Submit chatbot build for review',
+  name: 'Test Name',
+  description: 'Test description',
 };
 
 export const newListName = 'Done';
